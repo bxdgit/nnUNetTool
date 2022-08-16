@@ -9,7 +9,9 @@
 #include <QMessageBox>
 #include <QDir>
 #include <QStandardPaths.h>
-
+#include <QFile>
+#include <QTextStream>
+#include <QApplication>
 
 //STD includes
 #include <deque>
@@ -17,6 +19,8 @@
 #include <set>
 
 #include <Windows.h>
+//#include <QtWidgets/qapplication.h>
+
 
 
 class VisualSegment;
@@ -72,18 +76,6 @@ VisualnnUNetCMDPrivate::~VisualnnUNetCMDPrivate()
 	Q_Q(VisualnnUNetCMD);
 	//DeleteLabmapImage();
 }
-
-//void VisualnnUNetCMDPrivate::DeleteLabmapImage()
-//{
-//	//qDeleteAll(m_labmapImageMaps);
-//	QMapIterator<QString, vtkImageData*> i(m_labmapImageMaps);
-//	while (i.hasNext()) {
-//		i.next();
-//		i.value()->Delete();
-//	}
-//
-//	m_labmapImageMaps.clear();
-//}
 
 //---------------------------------------------------------------------------
 void VisualnnUNetCMDPrivate::GetValidFile(const QString& dirName, QStringList& fileNames, QString filter, qint64 minSize)
@@ -208,25 +200,12 @@ void VisualnnUNetCMD::SetCmdName(const QString cmdName)
 	d->m_cmdName = cmdName;
 }
 
+//---------------------------------------------------------------------------
 void VisualnnUNetCMD::SetFileMinSize(qint64 size)
 {
 	Q_D(VisualnnUNetCMD);
 	d->m_fileMinSize = size;
 }
-
-////---------------------------------------------------------------------------
-//void VisualnnUNetCMD::Setlabelmap(vtkImageData* imgData)
-//{
-//	Q_D(VisualnnUNetCMD);
-//	//d->m_labmapImage = imgData;
-//}
-
-////---------------------------------------------------------------------------
-//vtkImageData* VisualnnUNetCMD::Getlabelmap() const
-//{
-//	Q_D(const VisualnnUNetCMD);
-//	return d->m_labmapImage;
-//}
 
 //---------------------------------------------------------------------------
 void VisualnnUNetCMD::Run()
@@ -303,9 +282,31 @@ bool VisualnnUNetCMD::nnUNetCommand()
 	}
 
 
-	d->m_nnUNetProcess->start(d->m_cmdName, nnUNetCmd);
-
+	//d->m_nnUNetProcess->start(d->m_cmdName, nnUNetCmd);
+	WriteHistoryCmd(d->m_cmdName, nnUNetCmd);
 	return true;
+}
+
+//---------------------------------------------------------------------------
+void VisualnnUNetCMD::WriteHistoryCmd(const QString& cmd, const QStringList& Parameter)
+{
+	QString fileName = qApp->applicationDirPath() + "/history.txt";
+	QFile historyFile(fileName);
+	if (historyFile.open(QIODevice::ReadWrite | QIODevice::Append | QIODevice::Text))
+	{
+		QTextStream stream(&historyFile);
+		//stream.seek(file.size());
+		stream << cmd << " ";
+
+		foreach(const QString & str, Parameter)
+		{
+			stream << str << " ";
+		}
+		stream << "\n";
+		historyFile.flush();
+	}
+
+	historyFile.close();
 }
 
 //---------------------------------------------------------------------------
@@ -329,5 +330,4 @@ void VisualnnUNetCMD::nnUNetFinished(int exitCode, QProcess::ExitStatus exitStat
 	/*d->m_BusyWidget->hide();
 	d->m_BusyWidget->deleteLater();*/
 }
-
 

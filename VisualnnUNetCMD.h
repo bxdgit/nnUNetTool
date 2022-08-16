@@ -35,7 +35,8 @@ protected  slots:
 
 protected:
 	virtual bool nnUNetCommand();
-	void nnUNet_predicet_Task002_VerSe();
+
+	void WriteHistoryCmd(const QString& cmd,const QStringList& Parameter);
 
 protected:
 	QScopedPointer<VisualnnUNetCMDPrivate> d_ptr;
