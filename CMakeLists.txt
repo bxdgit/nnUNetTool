@@ -41,26 +41,43 @@ LINK_DIRECTORIES(
 
 )
 
-set(header_files
+set(HEADERS_FILES
   nnUNetTool.h
+  Stylesheet.h
+  VisualJsonConfigure.h
+  VisualnnUNetCMD.h
 )
 
-set(source_files
+set(SOURCES_FILES
   nnUNetTool.cpp
+  VisualnnUNetCMD.cxx
+  Stylesheet.cpp
+  VisualJsonConfigure.cpp
   main.cpp
 )
 
-set(ui_files
+set(FORMS_FILES
   nnUNetTool.ui
 )
 
-set(qrc_files
+set(RESOURCES_FILES
  Resources/nnUNetTool.qrc
 )
 
-qt5_wrap_cpp(${PROJECT_NAME}_MOC_CXX ${header_files})
-qt5_wrap_ui(${PROJECT_NAME}_UI_CXX ${ui_files})
-qt5_add_resources(${PROJECT_NAME}_RCC_CXX ${qrc_files})
+qt5_wrap_cpp(${PROJECT_NAME}_MOC_CXX ${HEADERS_FILES})
+qt5_wrap_ui(${PROJECT_NAME}_UI_CXX ${FORMS_FILES})
+qt5_add_resources(${PROJECT_NAME}_RCC_CXX ${RESOURCES_FILES})
+
+# Group files
+source_group("Resources" FILES
+  ${FORMS_FILES}
+  ${RESOURCES_FILES}
+)
+source_group("Generated" FILES
+  ${${PROJECT_NAME}_MOC_CXX}
+  ${${PROJECT_NAME}_UI_CXX} 
+  ${${PROJECT_NAME}_RCC_CXX}
+)
 
 
 set(app_WINRC nnUNetTool.rc)
@@ -70,8 +87,8 @@ set_property(SOURCE nnUNetTool.rc APPEND PROPERTY
 
 
 add_executable(${PROJECT_NAME} WIN32
-  ${header_files}
-  ${source_files}
+  ${HEADERS_FILES}
+  ${SOURCES_FILES}
   ${app_WINRC}
   ${${PROJECT_NAME}_MOC_CXX}
   ${${PROJECT_NAME}_UI_CXX}
@@ -86,7 +103,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()
 
 target_link_libraries(${PROJECT_NAME}
-  Qt5::Core 
+  Qt5::Core
   Qt5::Gui 
   Qt5::Widgets
   Qt5::Multimedia

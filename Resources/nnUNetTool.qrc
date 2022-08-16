@@ -1,4 +1,6 @@
 <RCC>
-    <qresource prefix="nnUNetTool">
+    <qresource prefix="/">
+        <file>qss/styledark.css</file>
+        <file>fonts/Alibaba-PuHuiTi-Regular.ttf</file>
     </qresource>
 </RCC>

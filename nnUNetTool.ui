@@ -1,28 +1,140 @@
-<UI version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>nnUNetTool</class>
- <widget class="QWidget" name="nnUNetTool" >
-  <property name="objectName" >
-   <string notr="true">nnUNetTool</string>
-  </property>
-  <property name="geometry" >
+ <widget class="QWidget" name="nnUNetTool">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>778</width>
+    <height>597</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>nnUNetTool</string>
-  </property>  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label_cmd">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>选择指令</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_cmd">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>48</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QToolButton" name="InFileTBtn">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>选择输入文件</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="InDirTBtn">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>选择输入目录</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="outDirTBtn">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>选择输出目录</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_model">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>选择模型文件</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_model">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>48</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QToolButton" name="RunTBtn">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>48</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>执行指令</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTextBrowser" name="textBrowser"/>
+   </item>
+  </layout>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
- <resources>
-   <include location="nnUNetTool.qrc"/>
- </resources>
+ <resources/>
  <connections/>
-</UI>
+</ui>
